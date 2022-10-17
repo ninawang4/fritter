@@ -2,6 +2,7 @@ import type {HydratedDocument, Types} from 'mongoose';
 import type {Freet} from './model';
 import FreetModel from './model';
 import UserCollection from '../user/collection';
+import CommentModel from '../comment/model';
 
 /**
  * This files contains a class that has the functionality to explore freets
@@ -97,5 +98,6 @@ class FreetCollection {
     await FreetModel.deleteMany({authorId});
   }
 }
+
 
 export default FreetCollection;

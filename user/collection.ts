@@ -1,6 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {User} from './model';
-import UserModel from './model';
+import UserModel from './model'; 
 
 /**
  * This file contains a class with functionality to interact with users stored

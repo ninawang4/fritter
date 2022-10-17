@@ -1,6 +1,7 @@
-import type {Types, PopulatedDoc, Document} from 'mongoose';
+import {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
+import CommentSection from './collection';
 
 /**
  * This file defines the properties stored in a Freet
@@ -12,6 +13,7 @@ export type Freet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: Types.ObjectId;
   dateCreated: Date;
+  // comment: Types.Subdocument;
   content: string;
   dateModified: Date;
 };
@@ -20,9 +22,12 @@ export type PopulatedFreet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: User;
   dateCreated: Date;
+  // comment: Types.Subdocument;
   content: string;
   dateModified: Date;
 };
+
+
 
 // Mongoose schema definition for interfacing with a MongoDB table
 // Freets stored in this table will have these fields, with the
@@ -40,6 +45,12 @@ const FreetSchema = new Schema<Freet>({
     type: Date,
     required: true
   },
+
+  // comment: {
+  //   type: Types.Subdocument,
+  //   required: true
+  // },
+
   // The content of the freet
   content: {
     type: String,
@@ -52,5 +63,19 @@ const FreetSchema = new Schema<Freet>({
   }
 });
 
+// const CommentSchema = new Schema<Comment>({
+//   parentFreet: {
+//     type: Schema.Types.ObjectId,
+//     required: true
+//   },
+
+//   content: {
+//     type: FreetSchema
+//   }
+
+// });
+
 const FreetModel = model<Freet>('Freet', FreetSchema);
+// const CommentModel = model<Comment>('Freet', CommentSchema);
 export default FreetModel;
+

@@ -21,6 +21,18 @@ The project is structured as follows:
   - `model.ts` - contains definition of user datatype
   - `router.ts` - contains backend user routes
   - `util.ts` contains user utility functions for transforming data returned to the client
+- `/follow` contains files related to follow concept
+- `/homepage` contains files related to home concept
+  - `collection.ts` contains homepage collection class to wrap around MongoDB database
+  - `middleware.ts` contains homepage middleware
+  - `model.ts` - contains definition of homepage datatype
+  - `router.ts` - contains backend homepage routes
+  - `util.ts` contains homepage utility functions for transforming data returned to the client
+- `/upvote` contains files related to upvote concept
+- `/comment` contains files related to comment concept
+- `/draft` contains files related to draft concept
+- `/schedule` contains files related to schedule concept
+- `/trending` contains files related to trending concept
 - `/public` contains the code for the frontend (HTML/CSS/browser JS)
 
 ## Installation
