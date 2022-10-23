@@ -75,6 +75,11 @@
           <input type="submit" value="Sign out">
         </form>
 
+        <form id="view-all-users">
+          <h3>View All Users</h3>
+          <input type="submit" value="View All Users">
+        </form>
+
         <form id="view-all-freets">
             <h3>View All Freets</h3>
             <input type="submit" value="View All Freets">
@@ -94,6 +99,10 @@
           <div>
             <label for="content">Content:</label>
             <textarea id="content" name="content"></textarea>
+          </div>
+          <div>
+            <label for="scheduled">Schedule Freet (optional):</label>
+            <input type="datetime-local" id="scheduled" name="scheduled">
           </div>
           <input type="submit" value="Create Freet">
         </form>
@@ -133,9 +142,31 @@
           <input type="submit" value="Comment">
         </form>
 
-        <form id="home-page">
-          <h3>View Home Page</h3>
-          <input type="submit" value="See Home Page">
+        <form id="feed">
+          <h3>View Feed</h3>
+          <select id="page" name="page">
+            <option value="home">Home Feed</option>
+            <option value="trending">Trending Feed</option>
+          </select>
+          <input type="submit" value="See Feed">
+        </form>
+
+        <form id="upvote">
+          <h3>Upvote Freet</h3>
+          <div>
+            <label for="id">Freet ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Upvote Freet">
+        </form>
+
+        <form id="follow">
+          <h3>Follow User</h3>
+          <div>
+            <label for="id">User ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Follow User">
         </form>
 
       </div>

@@ -53,7 +53,7 @@ const isValidFreetModifier = async (req: Request, res: Response, next: NextFunct
     res.status(403).json({
       error: 'Cannot modify other users\' freets.'
     });
-    return;
+    return; 
   }
 
   next();

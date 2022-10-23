@@ -153,6 +153,20 @@ const isAuthorExists = async (req: Request, res: Response, next: NextFunction) =
   next();
 };
 
+const isUserExists = async (req: Request, res: Response, next: NextFunction) => {
+  const validFormat = Types.ObjectId.isValid(req.params.followId);
+  const freet = validFormat ? await UserCollection.findOneByUserId(req.params.followId) : '';
+  if (!freet) {
+    res.status(404).json({
+      error: {
+        userNotFound: `user with user ID ${req.params.followId} does not exist.`
+      }
+    });
+    return;
+  }
+  next();
+};
+
 export {
   isCurrentSessionUserExists,
   isUserLoggedIn,
@@ -161,5 +175,6 @@ export {
   isAccountExists,
   isAuthorExists,
   isValidUsername,
-  isValidPassword
+  isValidPassword,
+  isUserExists
 };

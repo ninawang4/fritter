@@ -10,9 +10,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import * as userValidator from '../user/middleware';
 import {userRouter} from '../user/router';
+import { commentRouter } from '../comment/router';
 import {freetRouter} from '../freet/router';
-import { homeRouter } from '../homepage/router';
-// import { commentRouter } from '../comment/router';
+import {upvoteRouter} from '../upvote/router'
+import {followRouter} from '../follow/router'
+
 
 // Load environmental variables
 dotenv.config({});
@@ -78,8 +80,10 @@ app.get('/', (req: Request, res: Response) => {
 // Add routers from routes folder
 app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
-app.use('/api/homepage', homeRouter);
-// app.use('/api/comments', commentRouter);
+app.use('/api/comment', commentRouter);
+app.use('/api/upvote', upvoteRouter);
+app.use('/api/follow', followRouter);
+
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

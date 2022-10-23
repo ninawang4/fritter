@@ -1,19 +1,21 @@
 import {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
-import CommentSection from './collection';
-
-/**
- * This file defines the properties stored in a Freet
- * DO NOT implement operations here ---> use collection file
- */
 
 // Type definition for Freet on the backend
 export type Freet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: Types.ObjectId;
   dateCreated: Date;
-  // comment: Types.Subdocument;
+  comment: [
+    {commenterId: Types.ObjectId | string,
+    content: string,
+    dateCreated: Date,}
+  ];
+  scheduledTime: Date;
+  upvoters: [Types.ObjectId | string];
+  upvotes: Number;
+  engagement: Number;
   content: string;
   dateModified: Date;
 };
@@ -22,7 +24,15 @@ export type PopulatedFreet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: User;
   dateCreated: Date;
-  // comment: Types.Subdocument;
+  comment: [
+    {commenterId: Types.ObjectId | string,
+    content: string,
+    dateCreated: Date,}
+  ];
+  scheduledTime: Date;
+  upvoters: [Types.ObjectId | string];
+  upvotes: Number;
+  engagement: Number;
   content: string;
   dateModified: Date;
 };
@@ -46,11 +56,25 @@ const FreetSchema = new Schema<Freet>({
     required: true
   },
 
-  // comment: {
-  //   type: Types.Subdocument,
-  //   required: true
-  // },
+  scheduledTime: {
+    type: Date,
+    required: false
+  },
 
+  comment: [],
+  upvoters: [Schema.Types.ObjectId,],
+
+  upvotes: {
+    type: Number,
+    default: 0,
+    required: true
+  },
+
+  engagement: {
+    type: Number,
+    default: 0,
+    required: true
+  },
   // The content of the freet
   content: {
     type: String,
@@ -63,19 +87,7 @@ const FreetSchema = new Schema<Freet>({
   }
 });
 
-// const CommentSchema = new Schema<Comment>({
-//   parentFreet: {
-//     type: Schema.Types.ObjectId,
-//     required: true
-//   },
-
-//   content: {
-//     type: FreetSchema
-//   }
-
-// });
 
 const FreetModel = model<Freet>('Freet', FreetSchema);
-// const CommentModel = model<Comment>('Freet', CommentSchema);
 export default FreetModel;
 

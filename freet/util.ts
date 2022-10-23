@@ -7,7 +7,10 @@ type FreetResponse = {
   _id: string;
   author: string;
   dateCreated: string;
-  // parentFreet: string | null;
+  scheduledTime: string;
+  upvoters: string[];
+  upvotes: Number;
+  engagement: Number;
   content: string;
   dateModified: string;
 };
@@ -36,11 +39,16 @@ const constructFreetResponse = (freet: HydratedDocument<Freet>): FreetResponse =
   const {username} = freetCopy.authorId;
  
   delete freetCopy.authorId;
+
+
   return {
     ...freetCopy,
     _id: freetCopy._id.toString(),
     author: username,
-    // parentFreet: freetCopy.parentFreet.toString(),
+    upvoters: freet.upvoters.map(upvoter => upvoter.toString()),
+    upvotes: freet.upvotes,
+    engagement: freet.engagement,
+    scheduledTime: formatDate(freet.scheduledTime),
     dateCreated: formatDate(freet.dateCreated),
     dateModified: formatDate(freet.dateModified)
   };

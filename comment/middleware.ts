@@ -20,6 +20,4 @@ const isFreetParentExists = async (req: Request, res: Response, next: NextFuncti
   next();
 };
 
-export {
-    isFreetParentExists
-  };
+export {isFreetParentExists};

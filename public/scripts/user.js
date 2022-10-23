@@ -38,3 +38,15 @@ function signOut() {
     .then(showResponse)
     .catch(showResponse);
 }
+
+function follow(fields) {
+  fetch(`/api/follow/${fields.id}`, {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function viewAllUsers() {
+  fetch('/api/users')
+    .then(showResponse)
+    .catch(showResponse);
+}

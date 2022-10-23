@@ -91,6 +91,32 @@ class UserCollection {
     const user = await UserModel.deleteOne({_id: userId});
     return user !== null;
   }
+
+  /**
+   * Delete a user from the collection.
+   *
+   * @return {Promise<HydratedDocument<User>[]>} - An array of all users
+   */
+   static async findAll(): Promise<Array<HydratedDocument<User>>> {
+    return UserModel.find({});
+  }
+
+  /**
+   * Follow another user
+   *
+   * @param {string} followId - The userId of user to follow
+   * @param {string} userId - The userId of user that's following
+   *  - true if the user has been deleted, false otherwise
+   */
+   static async findOneAndFollow(followId: Types.ObjectId | string, userId: Types.ObjectId | string) {
+    const followedUser = await UserModel.findOne({_id: followId});
+    const user = await UserModel.findOne({_id: userId});
+    console.log('period');
+    followedUser.followers.push(user.username);
+    user.following.push(followedUser.username);
+    await user.save();
+    await followedUser.save();
+  }
 }
 
 export default UserCollection;

@@ -34,3 +34,25 @@ function deleteFreet(fields) {
     .then(showResponse)
     .catch(showResponse);
 }
+
+function viewAllFreets(fields) {
+  fetch('/api/freets')
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function upvoteFreet(fields) {
+  fetch(`/api/upvote/${fields.id}`, {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function seeFeed(fields) {
+  fetch(`api/freets/${fields.page}`)
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function clearInput(id) {
+  document.getElementById(id).value = "";
+}

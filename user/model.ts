@@ -10,6 +10,8 @@ import {Schema, model} from 'mongoose';
 export type User = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   username: string;
+  followers: [String];
+  following: [String];
   password: string;
   dateJoined: Date;
 };
@@ -28,6 +30,8 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  followers: [String],
+  following: [String],
   // The date the user joined
   dateJoined: {
     type: Date,
