@@ -164,28 +164,6 @@ class FreetCollection {
   return freet.populate('authorId');
   }
 
-  /**
-   * Upvote a freet with given freetId.
-   *
-   * @param {string} commenterId - The userId of the commenter
-   * @param {string} content - The content of the comment
-   * @param {Types.ObjectId | string} freetId - The id of the freet being commented on
-   * @return {Promise<HydratedDocument<Freet>>} - true if the freet has been upvoted, false otherwise
-   */
-  static async addComment(commenterId: Types.ObjectId | string, content: string, freetId: Types.ObjectId | string): Promise<HydratedDocument<Freet>> {
-    const parentFreet = await FreetModel.findOne({_id: freetId});
-    const date = new Date();
-    const comment = ({
-      commenterId,
-      content,
-      dateCreated: date,
-    });
-    parentFreet.comment.push(comment);
-    parentFreet.engagement = parentFreet.engagement.valueOf() + 1;
-    // FreetModel.findOneAndUpdate({_id: freetId}, {$inc : {engagement : 1}});
-    await parentFreet.save();
-    return parentFreet.populate('authorId');
-  }
 }
 
 

@@ -1,6 +1,6 @@
 import type {NextFunction, Request, Response} from 'express';
 import express from 'express';
-import FreetCollection from '../freet/collection';
+import CommentCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as commentValidator from './middleware';
@@ -29,10 +29,11 @@ const router = express.Router();
     ],
     async (req: Request, res: Response) => {
       const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-      const freet = await FreetCollection.addComment(userId, req.body.content, req.params.freetId);
+      const comment = await CommentCollection.addComment(userId, req.body.content, req.params.freetId);
     
       res.status(200).json({
         message: 'Your comment was created successfully.',
+        comment: comment,
       });
     }
   );

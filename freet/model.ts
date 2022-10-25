@@ -1,17 +1,15 @@
 import {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
+import type {Comment} from '../comment/model';
+import CommentModel from '../comment/model';
 
 // Type definition for Freet on the backend
 export type Freet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: Types.ObjectId;
   dateCreated: Date;
-  comment: [
-    {commenterId: Types.ObjectId | string,
-    content: string,
-    dateCreated: Date,}
-  ];
+  comment: [Comment];
   scheduledTime: Date;
   upvoters: [Types.ObjectId | string];
   upvotes: Number;
@@ -24,11 +22,12 @@ export type PopulatedFreet = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   authorId: User;
   dateCreated: Date;
-  comment: [
-    {commenterId: Types.ObjectId | string,
-    content: string,
-    dateCreated: Date,}
-  ];
+  // comment: [
+  //   {commenterId: Types.ObjectId | string,
+  //   content: string,
+  //   dateCreated: Date,}
+  // ];
+  comment: [Comment];
   scheduledTime: Date;
   upvoters: [Types.ObjectId | string];
   upvotes: Number;
@@ -62,6 +61,7 @@ const FreetSchema = new Schema<Freet>({
   },
 
   comment: [],
+
   upvoters: [Schema.Types.ObjectId,],
 
   upvotes: {
